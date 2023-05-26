@@ -6,6 +6,9 @@ import '../main.css';
 export const Listing = (props) => {
     const {items} = props;
     const result = [];
+    let leftLevel;
+
+
 
     items.forEach((elememt) => {
         var test  = "";
@@ -13,6 +16,13 @@ export const Listing = (props) => {
             test = elememt.MainImage.url_570xN;
         }
         console.log(test);
+
+        if(elememt.quantity > 20){
+            leftLevel = "level-high";
+        }else if (elememt.quantity < 21 && elememt.quantity > 10){
+            leftLevel = "level-medium";
+        }else {leftLevel = "level-low";}
+
         result.push(
             <div className="item-list">
                 <div className="item">
@@ -24,7 +34,7 @@ export const Listing = (props) => {
                     <div className="item-details">
                         <p className="item-title">{elememt.title}</p>
                         <p className="item-price">{elememt.currency_code + elememt.price}</p>
-                        <p className="item-quantity level-medium">{elememt.quantity} left</p>
+                        <p className={"item-quantity " + leftLevel}>{elememt.quantity} left</p>
                     </div>
                 </div>
             </div>
